@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public InputSystem_Actions inputActions;
     public PlayerRuido ruido;
     private CharacterController controller;
+    public LayerMask enemyLayer;
 
     [Header("Velocidades")]
     public float walkSpeed = 3f;
@@ -86,5 +87,13 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += Physics.gravity.y * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (((1 << collision.gameObject.layer) & enemyLayer) != 0)
+        {
+            ruido.haceRuido();
+        }
     }
 }

@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 928713314075920995}
   - component: {fileID: 8783260461726327882}
   - component: {fileID: 4108636920677786131}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,8 +308,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ruido: {fileID: 4108636920677786131}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
   walkSpeed: 3
-  runSpeed: 6
+  runSpeed: 6.5
   crouchSpeed: 1.5
   standHeight: 2
   crouchHeight: 1
@@ -371,3 +374,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ruido: 0
+  noiseRadius: 8

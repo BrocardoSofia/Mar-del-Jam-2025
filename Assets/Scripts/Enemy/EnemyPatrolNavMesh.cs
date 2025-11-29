@@ -1,55 +1,211 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyPatrolNavMesh : MonoBehaviour
+public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
 {
+    [Header("Patrol")]
     public Transform[] waypoints;
+    public float patrolSpeed = 3.5f;
     public float waitTimeAtPoint = 1.5f;
+
+    [Header("Hearing")]
+    public float hearingRadius = 12f;
+    public float chaseSpeed = 6f;
+
+    [Header("Attack")]
+    public Vector3 attackBoxCenter = new Vector3(0f, 0.5f, 1.5f);
+    public Vector3 attackBoxSize = new Vector3(1.2f, 1.0f, 2.5f);
+    public LayerMask attackMask;
+    public float attackCooldown = 1.0f;
 
     private NavMeshAgent agent;
     private int currentIndex = 0;
     private float waitTimer = 0f;
 
+    private Vector3? lastHeardPosition = null;
+    private bool isInvestigating = false;
+    private bool isAttacking = false;
+    private float lastAttackTime = -999f;
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        if (waypoints == null || waypoints.Length == 0)
-        {
-            Debug.LogError("Asigná waypoints en el inspector.");
-            enabled = false;
-            return;
-        }
+        if (agent == null) Debug.LogError("Falta NavMeshAgent en el enemigo.");
+        agent.speed = patrolSpeed;
     }
 
     void OnEnable()
     {
-        GoToCurrentWaypoint();
+        if (waypoints != null && waypoints.Length > 0) GoToCurrentWaypoint();
     }
 
     void Update()
     {
-        if (agent.pathPending) return;
+        if (isAttacking)
+        {
+            if (CheckAttackHitbox(out Collider[] hits))
+            {
+                if (Time.time - lastAttackTime >= attackCooldown)
+                {
+                    OnDetectTargets(hits);
+                }
+            }
+            return;
+        }
 
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (CheckAttackHitbox(out Collider[] hitboxHits))
+        {
+            OnDetectTargets(hitboxHits);
+            return;
+        }
+
+        bool heardAny = false;
+        if (NoiseSystem.Instance != null)
+        {
+            var noises = NoiseSystem.Instance.noises;
+            var heard = noises
+                .Where(n => Vector3.Distance(transform.position, n.pos) <= n.radius && Vector3.Distance(transform.position, n.pos) <= hearingRadius)
+                .ToList();
+
+            if (heard.Count > 0)
+            {
+                var nearest = heard.OrderBy(n => Vector3.Distance(transform.position, n.pos)).First();
+                lastHeardPosition = nearest.pos;
+                isInvestigating = true;
+
+                agent.isStopped = false;
+                agent.speed = chaseSpeed;
+                agent.SetDestination(nearest.pos);
+                heardAny = true;
+            }
+        }
+
+        if (!heardAny && isInvestigating && lastHeardPosition.HasValue)
+        {
+            agent.isStopped = false;
+            agent.speed = chaseSpeed;
+            agent.SetDestination(lastHeardPosition.Value);
+
+            if (CheckAttackHitbox(out Collider[] hitsWhileMoving))
+            {
+                OnDetectTargets(hitsWhileMoving);
+                return;
+            }
+
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                TryAttack();
+                if (lastHeardPosition.HasValue) NoiseSystem.Instance.ConsumeNoiseAtPosition(lastHeardPosition.Value, 0.6f);
+                lastHeardPosition = null;
+                isInvestigating = false;
+                agent.speed = patrolSpeed;
+                if (waypoints != null && waypoints.Length > 0) GoToCurrentWaypoint();
+            }
+
+            return;
+        }
+
+        agent.speed = Mathf.Lerp(agent.speed, patrolSpeed, 10f * Time.deltaTime);
+        if (waypoints == null || waypoints.Length == 0) return;
+
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
             waitTimer += Time.deltaTime;
             if (waitTimer >= waitTimeAtPoint)
             {
-                NextWaypoint();
+                currentIndex = (currentIndex + 1) % waypoints.Length;
                 GoToCurrentWaypoint();
                 waitTimer = 0f;
             }
         }
     }
 
-    void NextWaypoint()
-    {
-        currentIndex = (currentIndex + 1) % waypoints.Length;
-    }
-
     void GoToCurrentWaypoint()
     {
+        if (waypoints == null || waypoints.Length == 0) return;
+        agent.isStopped = false;
         agent.SetDestination(waypoints[currentIndex].position);
     }
-}
 
+    bool CheckAttackHitbox(out Collider[] hitsFiltered)
+    {
+        Vector3 boxCenterWorld = transform.TransformPoint(attackBoxCenter);
+        int mask = attackMask == 0 ? ~0 : attackMask;
+        Collider[] rawHits = Physics.OverlapBox(boxCenterWorld, attackBoxSize * 0.5f, transform.rotation, mask);
+
+        hitsFiltered = rawHits.Where(c => c != null && c.gameObject != gameObject && !c.transform.IsChildOf(transform)).ToArray();
+
+        return hitsFiltered.Length > 0;
+    }
+
+    void OnDetectTargets(Collider[] hits)
+    {
+        if (isAttacking && Time.time - lastAttackTime < attackCooldown) return;
+
+        agent.isStopped = true;
+        agent.ResetPath();
+        isInvestigating = false;
+        lastHeardPosition = null;
+
+        isAttacking = true;
+        lastAttackTime = Time.time;
+        PerformAttack(hits);
+
+        float attackDuration = 0.6f;
+        Invoke(nameof(EndAttack), attackDuration);
+    }
+
+    void EndAttack()
+    {
+        isAttacking = false;
+        agent.isStopped = false;
+        agent.speed = patrolSpeed;
+        if (waypoints != null && waypoints.Length > 0) GoToCurrentWaypoint();
+    }
+
+    void TryAttack()
+    {
+        if (CheckAttackHitbox(out Collider[] hits))
+        {
+            OnDetectTargets(hits);
+        }
+        else
+        {
+            Debug.Log("TryAttack: no se encontraron objetivos al llegar.");
+        }
+    }
+
+    void PerformAttack(Collider[] hits)
+    {
+        foreach (var c in hits)
+        {
+            if (c == null) continue;
+            if (c.gameObject.layer == LayerMask.NameToLayer("Player") || c.CompareTag("Player"))
+            {
+                Debug.Log($"Atacó al player: {c.name}");
+            }
+            else
+            {
+                Debug.Log($"Atacó a {c.name} (no player)");
+            }
+        }
+
+        if (hits.Length == 0)
+        {
+            Debug.Log("PerformAttack: atacó pero no encontró objetivos.");
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, hearingRadius);
+
+        Gizmos.color = Color.red;
+        Vector3 boxCenterWorld = transform.TransformPoint(attackBoxCenter);
+        Gizmos.matrix = Matrix4x4.TRS(boxCenterWorld, transform.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, attackBoxSize);
+        Gizmos.matrix = Matrix4x4.identity;
+    }
+}
