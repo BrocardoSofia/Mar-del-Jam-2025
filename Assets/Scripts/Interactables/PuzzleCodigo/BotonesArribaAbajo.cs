@@ -6,6 +6,8 @@ public class BotonesArribaAbajo : Interactable
     public bool sube =  true;
     public Digito digito;
     public BoardPassword board;
+    public AudioClip sonidoInteractuar;
+    public AudioSource audioSource;
 
     private string startPrompt;
     private bool puertaAbierta = false;
@@ -13,6 +15,13 @@ public class BotonesArribaAbajo : Interactable
     void Start()
     {
         startPrompt = prompMessage;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
     }
 
     public void cerrarPuerta()
@@ -26,6 +35,12 @@ public class BotonesArribaAbajo : Interactable
         if(!puertaAbierta)
         {
             int num = sube ? 1 : -1;
+
+            if (sonidoInteractuar != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(sonidoInteractuar);
+            }
+
             digito.cambiarDigito(num);
             board.abrirContraseña();
         }

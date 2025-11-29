@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5175685705524923771}
   - component: {fileID: 6478633307604934825}
   - component: {fileID: 6598349875135912156}
+  - component: {fileID: 7123209907802019574}
   m_Layer: 0
   m_Name: PasswordScreen
   m_TagString: Untagged
@@ -209,6 +210,103 @@ MonoBehaviour:
   - {fileID: 457089646635432105}
   puerta: {fileID: 2825200358943947675}
   codigo: 984
+--- !u!82 &7123209907802019574
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8452182463819021463}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 0b7e433e9fd62cf438efd925d7e46795, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &2721515767010293531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,6 +392,14 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 1584797644386272304, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 1584797644386272304, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 3771843419295829477, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: m_Name
       value: Digito1
@@ -302,6 +408,14 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 7679465524000334155, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 7679465524000334155, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 8856404852624404103, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.0924356
@@ -375,6 +489,14 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 1584797644386272304, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 1584797644386272304, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 3771843419295829477, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: m_Name
       value: Digito3
@@ -383,6 +505,14 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 7679465524000334155, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 7679465524000334155, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 8856404852624404103, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.13843554
@@ -456,6 +586,14 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 1584797644386272304, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 1584797644386272304, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 3771843419295829477, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: m_Name
       value: Digito2
@@ -464,6 +602,14 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 7679465524000334155, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 7679465524000334155, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 8856404852624404103, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.61343557

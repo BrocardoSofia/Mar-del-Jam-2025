@@ -1,11 +1,30 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerInventory : MonoBehaviour
 {
+    public AudioClip sonidoKey;
+    public AudioSource audioSource;
+
     private int keys = 0;
-    
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+    }
+
     public void addKey()
     {
+        if (sonidoKey != null)
+        {
+            AudioSource.PlayClipAtPoint(sonidoKey, Camera.main.transform.position, 1f);
+        }
+        
         keys++;
     }
 

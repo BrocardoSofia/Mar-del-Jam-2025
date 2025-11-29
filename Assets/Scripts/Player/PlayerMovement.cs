@@ -31,11 +31,9 @@ public class PlayerMovement : MonoBehaviour
     public float crouchPitch = 0.85f;
     private float currentPitch = 1f;
 
-    // --- campos añadidos mínimos ---
     private float currentInterval = -1f;
     private AudioClip[] currentClips = null;
     private Coroutine footstepCoroutine = null;
-    // ------------------------------
 
     private void Awake()
     {
@@ -108,7 +106,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartFootstepsIfNeeded(float interval, AudioClip[] clips)
     {
-        // Si no se están reproduciendo pasos, iniciar la coroutine
         if (!playingSteps && isGrounded)
         {
             currentInterval = interval;
@@ -117,31 +114,27 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        // Si ya se están reproduciendo pero cambió el intervalo o el array, reiniciar limpiamente
         if (playingSteps)
         {
             bool intervalChanged = !Mathf.Approximately(currentInterval, interval);
             bool clipsChanged = currentClips != clips;
             if (intervalChanged || clipsChanged)
             {
-                // Detener la coroutine actual si existe
                 if (footstepCoroutine != null)
                 {
                     StopCoroutine(footstepCoroutine);
                     footstepCoroutine = null;
                 }
 
-                // Asegurarse de que no quede audio en reproducción
                 if (footstepSource != null)
                 {
                     footstepSource.Stop();
                 }
 
-                // Actualizar referencias y arrancar la nueva coroutine
                 playingSteps = false;
                 currentInterval = interval;
                 currentClips = clips;
-                // arrancar nueva rutina
+
                 footstepCoroutine = StartCoroutine(FootstepRoutine(interval, clips));
             }
         }
@@ -149,7 +142,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopFootsteps()
     {
-        // Detener coroutine y limpiar estado
         if (footstepCoroutine != null)
         {
             StopCoroutine(footstepCoroutine);
@@ -169,12 +161,10 @@ public class PlayerMovement : MonoBehaviour
     {
         playingSteps = true;
 
-        // pequeña espera inicial opcional
         yield return null;
 
         while (playingSteps && controller.isGrounded)
         {
-            // Si el jugador dejó de moverse, salir
             if (inputActions.Player.Move.ReadValue<Vector2>().magnitude <= 0.1f)
             {
                 playingSteps = false;
@@ -192,7 +182,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            // Espera respetando el intervalo, pero salta si el jugador deja de moverse o pierde el suelo
             float elapsed = 0f;
             while (elapsed < interval)
             {
@@ -206,7 +195,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // limpiar estado al salir
         playingSteps = false;
         footstepCoroutine = null;
     }
