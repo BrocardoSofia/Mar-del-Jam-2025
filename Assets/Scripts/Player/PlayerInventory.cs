@@ -3,7 +3,8 @@ using UnityEngine.Audio;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public AudioClip sonidoKey;
+    public AudioClip sonidoKey; 
+    public AudioClip sonidoUsarKey;
     public AudioSource audioSource;
 
     private int keys = 0;
@@ -42,6 +43,10 @@ public class PlayerInventory : MonoBehaviour
         {
             key = 1;
             keys--;
+            if (sonidoUsarKey != null)
+            {
+                AudioSource.PlayClipAtPoint(sonidoUsarKey, Camera.main.transform.position, 1f);
+            }
         }
 
         return key;
