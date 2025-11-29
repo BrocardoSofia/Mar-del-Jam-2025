@@ -3043,6 +3043,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1867543021}
     - target: {fileID: 8783260461726327882, guid: 7cc521072c91fff4394850e82ead4e75, type: 3}
+      propertyPath: sonidoUsarKey
+      value: 
+      objectReference: {fileID: 8300000, guid: 51995b88000ddfa43a25b075de5e564f, type: 3}
+    - target: {fileID: 8783260461726327882, guid: 7cc521072c91fff4394850e82ead4e75, type: 3}
       propertyPath: sonidoInteractuar
       value: 
       objectReference: {fileID: 8300000, guid: 89dc6bbba2ae6c54a9e835dbe6fbf288, type: 3}
