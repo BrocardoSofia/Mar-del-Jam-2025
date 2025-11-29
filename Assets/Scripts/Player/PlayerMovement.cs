@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Referencias")]
     public InputSystem_Actions inputActions;
+    public PlayerRuido ruido;
     private CharacterController controller;
 
     [Header("Velocidades")]
@@ -19,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
     public float crouchTransitionSpeed = 5f;
 
     [Header("Estados")]
-    public bool ruido = false;
     private bool isRunning = false;
     private bool isCrouching = false;
 
@@ -61,22 +61,22 @@ public class PlayerMovement : MonoBehaviour
         if (isCrouching)
         {
             currentSpeed = crouchSpeed;
-            ruido = move.magnitude > 0.1f ? false : false;
+            ruido.dejaDeHacerRuido();
         }
         else if (isRunning && move.magnitude > 0.1f)
         {
             currentSpeed = runSpeed;
-            ruido = true;
+            ruido.haceRuido();
         }
         else if (move.magnitude > 0.1f)
         {
             currentSpeed = walkSpeed;
-            ruido = true;
+            ruido.haceRuido();
         }
         else
         {
             currentSpeed = 0f;
-            ruido = false;
+            ruido.dejaDeHacerRuido();
         }
 
         controller.Move(move * currentSpeed * Time.deltaTime);

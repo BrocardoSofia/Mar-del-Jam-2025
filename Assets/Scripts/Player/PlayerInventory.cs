@@ -2,15 +2,29 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private int keys = 0;
+    
+    public void addKey()
     {
-        
+        keys++;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void removeKey() 
+    { 
+        keys--; 
+    }
+
+    public int useKey()
     {
-        
+        int key;
+        if (keys == 0)
+            key = 0;
+        else
+        {
+            key = 1;
+            keys--;
+        }
+
+        return key;
     }
 }

@@ -5,6 +5,7 @@ public class BotonesArribaAbajo : Interactable
 {
     public bool sube =  true;
     public Digito digito;
+    public BoardPassword board;
 
     private string startPrompt;
     private bool puertaAbierta = false;
@@ -26,6 +27,7 @@ public class BotonesArribaAbajo : Interactable
         {
             int num = sube ? 1 : -1;
             digito.cambiarDigito(num);
+            board.abrirContraseña();
         }
     }
 }
