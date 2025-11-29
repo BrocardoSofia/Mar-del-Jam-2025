@@ -455,7 +455,7 @@ Transform:
   m_GameObject: {fileID: 1867542999}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1056.2494, y: 1010.42, z: 143.9532}
+  m_LocalPosition: {x: 1056.2494, y: 1010.81, z: 143.9532}
   m_LocalScale: {x: 1, y: 1.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -477,11 +477,9 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 6
   crouchSpeed: 1.5
-  groundCheck: {fileID: 1736062202}
-  groundDistance: 0.4
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
+  standHeight: 2
+  crouchHeight: 1
+  crouchTransitionSpeed: 5
   ruido: 0
 --- !u!143 &1867543005
 CharacterController:
@@ -520,6 +518,7 @@ GameObject:
   - component: {fileID: 1977400414}
   - component: {fileID: 1977400413}
   - component: {fileID: 1977400416}
+  - component: {fileID: 1977400417}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -645,6 +644,21 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1977400417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977400412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3348bf05589cc144cba28e16250c6f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 7
+  minY: -80
+  maxY: 80
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

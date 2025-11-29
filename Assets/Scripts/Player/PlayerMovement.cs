@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         inputActions.Player.Enable();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void OnDisable()
