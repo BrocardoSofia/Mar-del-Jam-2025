@@ -1,0 +1,25 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class ActionsButtons : MonoBehaviour
+{
+    public void goHome()
+    {
+        SceneManager.LoadScene("0.Menu");
+    }
+
+    public void startGame()
+    {
+        SceneManager.LoadScene("1.Level1");
+    }
+
+    public void gameOver()
+    {
+        SceneManager.LoadScene("0.GameOver");
+    }
+
+    public void exitGame()
+    {
+        Application.Quit();
+    }
+}
