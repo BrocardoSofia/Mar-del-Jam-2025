@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
 {
@@ -183,17 +184,10 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
             if (c == null) continue;
             if (c.gameObject.layer == LayerMask.NameToLayer("Player") || c.CompareTag("Player"))
             {
-                Debug.Log($"Atacó al player: {c.name}");
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                SceneManager.LoadScene("00.GameOver");
             }
-            else
-            {
-                Debug.Log($"Atacó a {c.name} (no player)");
-            }
-        }
-
-        if (hits.Length == 0)
-        {
-            Debug.Log("PerformAttack: atacó pero no encontró objetivos.");
         }
     }
 

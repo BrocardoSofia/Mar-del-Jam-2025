@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerRuido ruido;
     private CharacterController controller;
     public LayerMask enemyLayer;
+    public LayerMask finalLayer;
 
     [Header("Velocidades")]
     public float walkSpeed = 3f;
@@ -95,5 +96,10 @@ public class PlayerMovement : MonoBehaviour
         {
             ruido.haceRuido();
         }
+        else if(((1 << collision.gameObject.layer) & finalLayer) != 0)
+        {
+            //final
+        }
     }
+
 }
