@@ -9,7 +9,7 @@ public class MusicManager : MonoBehaviour
     [Range(0f, 1f)] public float volume = 0.5f;
     public bool loop = true;
 
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     void Awake()
     {
@@ -36,12 +36,11 @@ public class MusicManager : MonoBehaviour
 
     void Start()
     {
-        AssignCameraAudioSource();
+
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        AssignCameraAudioSource();
     }
 
     void AssignCameraAudioSource()

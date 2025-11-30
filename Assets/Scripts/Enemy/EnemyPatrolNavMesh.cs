@@ -36,6 +36,8 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     public Image fadeImage;
     public float fadeDuration = 1.5f;
 
+    public Image atackUIImage;
+
     public PlayerCamera playerCamera;
     public Camera cam;
     public Transform targetPoint;
@@ -62,6 +64,11 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     private bool isAttacking = false;
     private float lastAttackTime = -999f;
     private bool playerDead = false;
+
+    public AudioClip atackSound;
+    public AudioClip ambienteSound;
+
+    private int iniciaAtaque = 0;
 
     void Awake()
     {
@@ -178,6 +185,8 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
         // Si está esperando entre waypoints
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && !isInvestigating)
         {
+            iniciaAtaque = 0;
+            OcultarImagen();
             animator.Play("watch_rata");
             return;
         }
@@ -185,6 +194,14 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
         // Si corre (persecución)
         if (speed >= chaseSpeed * 0.5f)
         {
+            if (iniciaAtaque == 0)
+                MusicManager.Instance.PlayMusic(atackSound);
+
+            
+            MostrarImagen();
+
+            iniciaAtaque = 1;
+
             animator.Play("run_rata");
             return;
         }
@@ -192,12 +209,37 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
         // Si camina (patrulla normal)
         if (speed > 0.1f)
         {
+            iniciaAtaque = 0;
+            OcultarImagen();
             animator.Play("walk_rata");
             return;
         }
 
         // Idle / buscar
         animator.Play("watch_rata");
+        iniciaAtaque = 0;
+        OcultarImagen();
+    }
+
+    public void MostrarImagen()
+    {
+        Debug.Log("Mostrar");
+        if (iniciaAtaque == 0)
+            MusicManager.Instance.PlayMusic(atackSound);
+
+        Color c = atackUIImage.color;
+        c.a = 1f;
+        atackUIImage.color = c;
+    }
+
+    public void OcultarImagen()
+    {
+        Debug.Log("No Mostrar");
+        if (iniciaAtaque == 0)
+            MusicManager.Instance.PlayMusic(ambienteSound);
+        Color c = atackUIImage.color;
+        c.a = 0f;
+        atackUIImage.color = c;
     }
 
     void HandleFootsteps()
@@ -283,7 +325,9 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     }
     void EndAttack()
     {
+        iniciaAtaque = 0;
         isAttacking = false;
+        
         agent.isStopped = false;
         agent.speed = patrolSpeed;
         if (waypoints != null && waypoints.Length > 0) GoToCurrentWaypoint();
@@ -303,6 +347,7 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
 
     void PerformAttack(Collider[] hits)
     {
+
         foreach (var c in hits)
         {
             if (c == null) continue;
@@ -340,6 +385,18 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
                 }
             }
         }
+
+        if (attackSound != null)
+            audioSource.PlayOneShot(attackSound);
+
+        if (NoiseSystem.Instance != null)
+        {
+            Debug.Log("2");
+            NoiseSystem.Instance.noises.Clear();
+        }
+
+        iniciaAtaque = 0;
+        isAttacking = false;
     }
 
     IEnumerator RotateToTarget()

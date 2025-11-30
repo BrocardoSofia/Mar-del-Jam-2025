@@ -11,6 +11,7 @@ public class ActionsButtons : MonoBehaviour
 
     public void startGame()
     {
+        //SceneManager.LoadScene("1.Level1");
         SceneManager.LoadScene("0.Inicio");
     }
 

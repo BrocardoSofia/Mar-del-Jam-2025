@@ -278,10 +278,11 @@ MonoBehaviour:
   - {fileID: 8104047983919216578}
   patrolSpeed: 2.5
   waitTimeAtPoint: 1.5
+  music: {fileID: 0}
   hearingRadius: 20
   chaseSpeed: 5.6
-  attackBoxCenter: {x: 0, y: 1.5, z: 1}
-  attackBoxSize: {x: 1.11, y: 2.13, z: 0.57}
+  attackBoxCenter: {x: 0, y: 1.5, z: 0.66}
+  attackBoxSize: {x: 0.58, y: 4.2, z: 0.15}
   attackMask:
     serializedVersion: 2
     m_Bits: 8
@@ -314,6 +315,7 @@ MonoBehaviour:
   audioSource: {fileID: 8887648065672524945}
   fadeImage: {fileID: 0}
   fadeDuration: 5
+  atackUIImage: {fileID: 0}
   playerCamera: {fileID: 0}
   cam: {fileID: 0}
   targetPoint: {fileID: 0}
@@ -325,6 +327,8 @@ MonoBehaviour:
   paramIsWaiting: IsWaiting
   walkStepInterval: 0.8
   runStepInterval: 0.4
+  atackSound: {fileID: 0}
+  ambienteSound: {fileID: 0}
 --- !u!82 &8887648065672524945
 AudioSource:
   m_ObjectHideFlags: 0

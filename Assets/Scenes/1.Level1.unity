@@ -3102,6 +3102,81 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0020556638, y: 0.0007955369, z: 0.0018353276}
   m_Center: {x: 0.00005737312, y: -0.00053274014, z: 0.000050207826}
+--- !u!1 &604413043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 604413044}
+  - component: {fileID: 604413046}
+  - component: {fileID: 604413045}
+  m_Layer: 5
+  m_Name: AtackUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &604413044
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604413043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1677845552}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000061035, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &604413045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604413043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d09e9fdbe1c5caa46a6dbfbf36896796, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &604413046
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604413043}
+  m_CullTransparentMesh: 1
 --- !u!1 &606597583
 GameObject:
   m_ObjectHideFlags: 0
@@ -5843,8 +5918,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1718111474}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: atackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 10546d9649879d14e8277d84c34d122e, type: 3}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: chaseSpeed
-      value: 5.6
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: attackSound
@@ -5859,6 +5938,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 272291508}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: atackUIImage
+      value: 
+      objectReference: {fileID: 604413045}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: fadeDuration
       value: 5
       objectReference: {fileID: 0}
@@ -5866,6 +5949,10 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1195147503}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: ambienteSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e93683c9c0a995d48b3f20927db0ac5a, type: 3}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: hearingRadius
       value: 10
@@ -9750,8 +9837,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1718111474}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: atackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 10546d9649879d14e8277d84c34d122e, type: 3}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: chaseSpeed
-      value: 5.6
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: attackSound
@@ -9766,6 +9857,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 272291508}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: atackUIImage
+      value: 
+      objectReference: {fileID: 604413045}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: fadeDuration
       value: 5
       objectReference: {fileID: 0}
@@ -9773,6 +9868,10 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1195147503}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: ambienteSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e93683c9c0a995d48b3f20927db0ac5a, type: 3}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: hearingRadius
       value: 10
@@ -11221,6 +11320,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 242110840}
+  - {fileID: 604413044}
   - {fileID: 2145987574}
   - {fileID: 1718111473}
   - {fileID: 440152350}
@@ -14624,8 +14724,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1718111474}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: atackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 10546d9649879d14e8277d84c34d122e, type: 3}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: chaseSpeed
-      value: 5.6
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: attackSound
@@ -14640,6 +14744,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 272291508}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: atackUIImage
+      value: 
+      objectReference: {fileID: 604413045}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: fadeDuration
       value: 5
       objectReference: {fileID: 0}
@@ -14647,6 +14755,10 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1195147503}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: ambienteSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e93683c9c0a995d48b3f20927db0ac5a, type: 3}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: hearingRadius
       value: 10
