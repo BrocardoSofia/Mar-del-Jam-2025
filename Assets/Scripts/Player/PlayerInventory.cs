@@ -17,6 +17,7 @@ public class PlayerInventory : MonoBehaviour
     public Sprite sinPiedras;
     public Sprite conPiedras;
 
+    [SerializeField]
     private int keys = 0;
     private bool piedra = false;
 

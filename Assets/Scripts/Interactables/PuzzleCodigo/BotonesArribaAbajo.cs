@@ -9,7 +9,7 @@ public class BotonesArribaAbajo : Interactable
     public AudioClip sonidoInteractuar;
     public AudioSource audioSource;
 
-    public PlayerRuido ruido;
+    //public PlayerRuido ruido;
 
     private string startPrompt;
     private bool puertaAbierta = false;
@@ -36,8 +36,8 @@ public class BotonesArribaAbajo : Interactable
     {
         if(!puertaAbierta)
         {
-            gameObject.layer = LayerMask.NameToLayer("AttackOject");
-            ruido.haceRuido(1, transform.position);
+            gameObject.layer = LayerMask.NameToLayer("Interactable");
+            //ruido.haceRuido(1, transform.position);
             int num = sube ? 1 : -1;
 
             if (sonidoInteractuar != null && audioSource != null)
