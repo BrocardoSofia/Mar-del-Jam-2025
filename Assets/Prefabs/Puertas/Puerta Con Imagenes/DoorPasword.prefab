@@ -307,6 +307,145 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &797992908378172229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5842761820056136659}
+    m_Modifications:
+    - target: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.025996685
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0020222664
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.08604431
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071065
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071071
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259968242458187862, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_Name
+      value: puerta_puzzle_v02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077363612486879873, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_Size.x
+      value: 0.18798828
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077363612486879873, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_Size.y
+      value: 2.142517
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077363612486879873, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_Size.z
+      value: 1.110321
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077363612486879873, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_Center.x
+      value: 0.11987305
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077363612486879873, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_Center.y
+      value: 0.9284363
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077363612486879873, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      propertyPath: m_Center.z
+      value: 0.530426
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2259968242458187862, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7377616770833306855}
+  m_SourcePrefab: {fileID: 100100000, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+--- !u!1 &1463123932621779731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2259968242458187862, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+  m_PrefabInstance: {fileID: 797992908378172229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7377616770833306855
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463123932621779731}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!4 &2235438919082273193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1447579110838764268, guid: 2416f4932644a444faf588fca5aa5638, type: 3}
+  m_PrefabInstance: {fileID: 797992908378172229}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2721515767010293531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -321,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8417628754597960904, guid: 52d5d47999a2a864ebbcc57773598cb4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.02
+      value: 4.044
       objectReference: {fileID: 0}
     - target: {fileID: 8417628754597960904, guid: 52d5d47999a2a864ebbcc57773598cb4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -329,7 +468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8417628754597960904, guid: 52d5d47999a2a864ebbcc57773598cb4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.991
+      value: 14.937
       objectReference: {fileID: 0}
     - target: {fileID: 8417628754597960904, guid: 52d5d47999a2a864ebbcc57773598cb4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -360,8 +499,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8522532338395154077, guid: 52d5d47999a2a864ebbcc57773598cb4, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8417628754597960904, guid: 52d5d47999a2a864ebbcc57773598cb4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2235438919082273193}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d5d47999a2a864ebbcc57773598cb4, type: 3}
 --- !u!4 &5842761820056136659 stripped
@@ -400,10 +543,34 @@ PrefabInstance:
       propertyPath: sonidoInteractuar
       value: 
       objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
+    - target: {fileID: 2633529729908525216, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 2633529729908525216, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 2633529729908525216, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 3771843419295829477, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: m_Name
       value: Digito1
       objectReference: {fileID: 0}
+    - target: {fileID: 7575401789750754598, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 7575401789750754598, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 7575401789750754598, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 7679465524000334155, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: board
       value: 
@@ -497,10 +664,34 @@ PrefabInstance:
       propertyPath: sonidoInteractuar
       value: 
       objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
+    - target: {fileID: 2633529729908525216, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 2633529729908525216, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 2633529729908525216, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 3771843419295829477, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: m_Name
       value: Digito3
       objectReference: {fileID: 0}
+    - target: {fileID: 7575401789750754598, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 7575401789750754598, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 7575401789750754598, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 7679465524000334155, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: board
       value: 
@@ -594,10 +785,34 @@ PrefabInstance:
       propertyPath: sonidoInteractuar
       value: 
       objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
+    - target: {fileID: 2633529729908525216, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 2633529729908525216, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 2633529729908525216, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 3771843419295829477, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: m_Name
       value: Digito2
       objectReference: {fileID: 0}
+    - target: {fileID: 7575401789750754598, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 6598349875135912156}
+    - target: {fileID: 7575401789750754598, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7123209907802019574}
+    - target: {fileID: 7575401789750754598, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
+      propertyPath: sonidoInteractuar
+      value: 
+      objectReference: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     - target: {fileID: 7679465524000334155, guid: 04f5ff250458af04591e2e2b183c4fea, type: 3}
       propertyPath: board
       value: 
