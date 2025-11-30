@@ -15,11 +15,14 @@ public class PlayerAutoFinish : MonoBehaviour
     public Image fadeImage;
     public float durationWalk = 5f;
     public string sceneToLoad;
+    public PlayerMusic music;
 
     void OnTriggerEnter(Collider other)
     {
         playerMovement.enabled = false;
         playerCamera.enabled = false;
+
+        music.reproducirFinalBueno();
 
         StartCoroutine(RotateToTarget());
         StartCoroutine(MoveToPoint(other.transform));

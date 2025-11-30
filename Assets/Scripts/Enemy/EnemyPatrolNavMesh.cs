@@ -13,6 +13,8 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     public float patrolSpeed = 3.5f;
     public float waitTimeAtPoint = 1.5f;
 
+    public PlayerMusic music;
+
     [Header("Hearing")]
     public float hearingRadius = 12f;
     public float chaseSpeed = 6f;
@@ -319,6 +321,7 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
 
                 playerCamera.enabled = false;
 
+                music.reproducirFinalMalo();
                 StartCoroutine(RotateToTarget());
                 StartCoroutine(FadeAndLoadScene("00.GameOver"));
             }
