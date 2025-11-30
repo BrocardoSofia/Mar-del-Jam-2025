@@ -17,12 +17,16 @@ public class Luz : Interactable
     [SerializeField] private Color emissionColor = Color.yellow;
     [SerializeField] private float intensity = 3f;
 
+    private Renderer rend;
     private Material mat;
 
     void Start()
     {
         startPrompt = prompMessage;
-        mat = targetRenderer.material;
+        rend = GetComponent<Renderer>();
+        mat = rend.material;
+
+        mat.DisableKeyword("_EMISSION");
 
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -48,7 +52,7 @@ public class Luz : Interactable
     public void apagar()
     {
         gameObject.layer = LayerMask.NameToLayer("Interactable");
-        mat.SetColor("_EmissionColor", Color.black);
+        mat.DisableKeyword("_EMISSION");
     }
 
     public void encender()
