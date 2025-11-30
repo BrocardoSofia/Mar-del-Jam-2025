@@ -39,6 +39,13 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     public Transform targetPoint;
     public float duration = 1f;
 
+    [Header("Animación (opcional)")]
+    public Animator animator;
+    public string paramSpeed = "Speed";
+    public string paramIsRunning = "IsRunning";
+    public string paramAttack = "IsAttacking";
+    public string paramIsWaiting = "IsWaiting";
+
     // Intervalos de pasos
     public float walkStepInterval = 0.8f;
     public float runStepInterval = 0.4f;
@@ -70,89 +77,98 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
 
     void Update()
     {
-        if (!playerDead)
+        if (playerDead) return;
+
+        HandleFootsteps();
+        UpdateAnimations(); // ← ANIMACIÓN
+
+        if (isAttacking)
         {
-            HandleFootsteps();
-
-            if (isAttacking)
+            if (CheckAttackHitbox(out Collider[] hits) && Time.time - lastAttackTime >= attackCooldown)
             {
-                if (CheckAttackHitbox(out Collider[] hits))
-                {
-                    if (Time.time - lastAttackTime >= attackCooldown)
-                    {
-                        OnDetectTargets(hits);
-                    }
-                }
-                return;
+                OnDetectTargets(hits);
             }
+            return;
+        }
 
-            if (CheckAttackHitbox(out Collider[] hitboxHits))
+        if (CheckAttackHitbox(out Collider[] hitboxHits))
+        {
+            OnDetectTargets(hitboxHits);
+            return;
+        }
+
+        bool heardAny = false;
+
+        // --------- HEARING ---------
+        if (NoiseSystem.Instance != null)
+        {
+            var heard = NoiseSystem.Instance.noises
+                .Where(n => Vector3.Distance(transform.position, n.pos) <= hearingRadius)
+                .ToList();
+
+            if (heard.Count > 0)
             {
-                OnDetectTargets(hitboxHits);
-                return;
-            }
+                heardAny = true;
+                var nearest = heard.OrderBy(n => Vector3.Distance(transform.position, n.pos)).First();
+                lastHeardPosition = nearest.pos;
+                isInvestigating = true;
 
-            bool heardAny = false;
-            if (NoiseSystem.Instance != null)
-            {
-                var noises = NoiseSystem.Instance.noises;
-                var heard = noises
-                    .Where(n => Vector3.Distance(transform.position, n.pos) <= hearingRadius)
-                    .ToList();
-
-                if (heard.Count > 0)
-                {
-                    var nearest = heard.OrderBy(n => Vector3.Distance(transform.position, n.pos)).First();
-                    lastHeardPosition = nearest.pos;
-                    isInvestigating = true;
-
-                    agent.isStopped = false;
-                    agent.speed = chaseSpeed;
-                    agent.SetDestination(nearest.pos);
-                    heardAny = true;
-                }
-            }
-
-            if (!heardAny && isInvestigating && lastHeardPosition.HasValue)
-            {
                 agent.isStopped = false;
                 agent.speed = chaseSpeed;
-                agent.SetDestination(lastHeardPosition.Value);
+                agent.SetDestination(nearest.pos);
+            }
+        }
 
-                if (CheckAttackHitbox(out Collider[] hitsWhileMoving))
-                {
-                    OnDetectTargets(hitsWhileMoving);
-                    return;
-                }
+        // --------- INVESTIGACIÓN ---------
+        if (!heardAny && isInvestigating && lastHeardPosition.HasValue)
+        {
+            agent.speed = chaseSpeed;
+            agent.SetDestination(lastHeardPosition.Value);
 
-                if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    TryAttack();
-                    if (lastHeardPosition.HasValue) NoiseSystem.Instance.ConsumeNoiseAtPosition(lastHeardPosition.Value, 0.6f);
-                    lastHeardPosition = null;
-                    isInvestigating = false;
-                    agent.speed = patrolSpeed;
-                    if (waypoints != null && waypoints.Length > 0) GoToCurrentWaypoint();
-                }
-
+            if (CheckAttackHitbox(out Collider[] hitsWhileMoving))
+            {
+                OnDetectTargets(hitsWhileMoving);
                 return;
             }
-
-            agent.speed = Mathf.Lerp(agent.speed, patrolSpeed, 10f * Time.deltaTime);
-            if (waypoints == null || waypoints.Length == 0) return;
 
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                waitTimer += Time.deltaTime;
-                if (waitTimer >= waitTimeAtPoint)
-                {
-                    currentIndex = (currentIndex + 1) % waypoints.Length;
-                    GoToCurrentWaypoint();
-                    waitTimer = 0f;
-                }
+                TryAttack();
+                lastHeardPosition = null;
+                isInvestigating = false;
+                agent.speed = patrolSpeed;
+
+                GoToCurrentWaypoint();
+            }
+            return;
+        }
+
+        // --------- PATRULLA ---------
+        agent.speed = Mathf.Lerp(agent.speed, patrolSpeed, 10f * Time.deltaTime);
+
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            waitTimer += Time.deltaTime;
+            SafeAnimSet(paramIsWaiting, true); // ← ANIMACIÓN
+
+            if (waitTimer >= waitTimeAtPoint)
+            {
+                currentIndex = (currentIndex + 1) % waypoints.Length;
+                GoToCurrentWaypoint();
+                waitTimer = 0f;
+                SafeAnimSet(paramIsWaiting, false);
             }
         }
-        
+    }
+
+
+    // ########### ANIMACIÓN principal ###########
+    void UpdateAnimations()
+    {
+        float speed = agent.velocity.magnitude;
+
+        SafeAnimSetFloat(paramSpeed, speed);
+        SafeAnimSet(paramIsRunning, speed >= chaseSpeed * 0.7f);
     }
 
     void HandleFootsteps()
@@ -204,6 +220,26 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
         return hitsFiltered.Length > 0;
     }
 
+    void SafeAnimSet(string param, bool value)
+    {
+        if (animator == null) return;
+        if (!animator.HasParameterOfType(param, AnimatorControllerParameterType.Bool)) return;
+        animator.SetBool(param, value);
+    }
+
+    void SafeAnimSetFloat(string param, float value)
+    {
+        if (animator == null) return;
+        if (!animator.HasParameterOfType(param, AnimatorControllerParameterType.Float)) return;
+        animator.SetFloat(param, value);
+    }
+
+    void SafeAnimTrigger(string param)
+    {
+        if (animator == null) return;
+        if (!animator.HasParameter(param)) return;
+        animator.SetTrigger(param);
+    }
 
     void OnDetectTargets(Collider[] hits)
     {
@@ -237,8 +273,6 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
             if (waypoints != null && waypoints.Length > 0) GoToCurrentWaypoint();
         }
     }
-
-
     void EndAttack()
     {
         isAttacking = false;
@@ -341,5 +375,20 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
         Gizmos.matrix = Matrix4x4.TRS(boxCenterWorld, transform.rotation, Vector3.one);
         Gizmos.DrawWireCube(Vector3.zero, attackBoxSize);
         Gizmos.matrix = Matrix4x4.identity;
+    }
+}
+
+public static class AnimatorExtensions
+{
+    public static bool HasParameter(this Animator animator, string paramName)
+    {
+        if (animator == null) return false;
+        return animator.parameters.Any(p => p.name == paramName);
+    }
+
+    public static bool HasParameterOfType(this Animator animator, string paramName, AnimatorControllerParameterType type)
+    {
+        if (animator == null) return false;
+        return animator.parameters.Any(p => p.name == paramName && p.type == type);
     }
 }
