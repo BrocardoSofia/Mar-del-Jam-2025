@@ -5,11 +5,11 @@ public class PlayerRuido : MonoBehaviour
     public bool ruido = false;
     public float noiseRadius = 8f;
 
-    public void haceRuido(float radiusMultiplier = 1f)
+    public void haceRuido(float radiusMultiplier, Vector3 position)
     {
         ruido = true;
         float radius = noiseRadius * radiusMultiplier;
-        NoiseSystem.Instance.RegisterNoise(transform.position, radius, gameObject);
+        NoiseSystem.Instance.RegisterNoise(position, radius, gameObject);
     }
 
     public void dejaDeHacerRuido()

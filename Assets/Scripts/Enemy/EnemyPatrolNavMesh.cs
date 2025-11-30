@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.Processors;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
 {
@@ -18,6 +21,7 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     public Vector3 attackBoxCenter = new Vector3(0f, 0.5f, 1.5f);
     public Vector3 attackBoxSize = new Vector3(1.2f, 1.0f, 2.5f);
     public LayerMask attackMask;
+    public LayerMask attackObject;
     public float attackCooldown = 1.0f;
 
     [Header("Audio")]
@@ -25,6 +29,15 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     public AudioClip[] runSounds;    // sonidos al correr
     public AudioClip attackSound;    // sonido al atacar
     public AudioSource audioSource;
+
+
+    public Image fadeImage;
+    public float fadeDuration = 1.5f;
+
+    public PlayerCamera playerCamera;
+    public Camera cam;
+    public Transform targetPoint;
+    public float duration = 1f;
 
     // Intervalos de pasos
     public float walkStepInterval = 0.8f;
@@ -39,6 +52,7 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     private bool isInvestigating = false;
     private bool isAttacking = false;
     private float lastAttackTime = -999f;
+    private bool playerDead = false;
 
     void Awake()
     {
@@ -56,88 +70,91 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
 
     void Update()
     {
-        HandleFootsteps(); // 🔊 reproducir sonidos de pasos según velocidad
-
-        if (isAttacking)
+        if (!playerDead)
         {
-            if (CheckAttackHitbox(out Collider[] hits))
+            HandleFootsteps();
+
+            if (isAttacking)
             {
-                if (Time.time - lastAttackTime >= attackCooldown)
+                if (CheckAttackHitbox(out Collider[] hits))
                 {
-                    OnDetectTargets(hits);
+                    if (Time.time - lastAttackTime >= attackCooldown)
+                    {
+                        OnDetectTargets(hits);
+                    }
                 }
-            }
-            return;
-        }
-
-        if (CheckAttackHitbox(out Collider[] hitboxHits))
-        {
-            OnDetectTargets(hitboxHits);
-            return;
-        }
-
-        bool heardAny = false;
-        if (NoiseSystem.Instance != null)
-        {
-            var noises = NoiseSystem.Instance.noises;
-            var heard = noises
-                .Where(n => Vector3.Distance(transform.position, n.pos) <= hearingRadius)
-                .ToList();
-
-            if (heard.Count > 0)
-            {
-                var nearest = heard.OrderBy(n => Vector3.Distance(transform.position, n.pos)).First();
-                lastHeardPosition = nearest.pos;
-                isInvestigating = true;
-
-                agent.isStopped = false;
-                agent.speed = chaseSpeed;
-                agent.SetDestination(nearest.pos);
-                heardAny = true;
-            }
-        }
-
-        if (!heardAny && isInvestigating && lastHeardPosition.HasValue)
-        {
-            agent.isStopped = false;
-            agent.speed = chaseSpeed;
-            agent.SetDestination(lastHeardPosition.Value);
-
-            if (CheckAttackHitbox(out Collider[] hitsWhileMoving))
-            {
-                OnDetectTargets(hitsWhileMoving);
                 return;
             }
 
+            if (CheckAttackHitbox(out Collider[] hitboxHits))
+            {
+                OnDetectTargets(hitboxHits);
+                return;
+            }
+
+            bool heardAny = false;
+            if (NoiseSystem.Instance != null)
+            {
+                var noises = NoiseSystem.Instance.noises;
+                var heard = noises
+                    .Where(n => Vector3.Distance(transform.position, n.pos) <= hearingRadius)
+                    .ToList();
+
+                if (heard.Count > 0)
+                {
+                    var nearest = heard.OrderBy(n => Vector3.Distance(transform.position, n.pos)).First();
+                    lastHeardPosition = nearest.pos;
+                    isInvestigating = true;
+
+                    agent.isStopped = false;
+                    agent.speed = chaseSpeed;
+                    agent.SetDestination(nearest.pos);
+                    heardAny = true;
+                }
+            }
+
+            if (!heardAny && isInvestigating && lastHeardPosition.HasValue)
+            {
+                agent.isStopped = false;
+                agent.speed = chaseSpeed;
+                agent.SetDestination(lastHeardPosition.Value);
+
+                if (CheckAttackHitbox(out Collider[] hitsWhileMoving))
+                {
+                    OnDetectTargets(hitsWhileMoving);
+                    return;
+                }
+
+                if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    TryAttack();
+                    if (lastHeardPosition.HasValue) NoiseSystem.Instance.ConsumeNoiseAtPosition(lastHeardPosition.Value, 0.6f);
+                    lastHeardPosition = null;
+                    isInvestigating = false;
+                    agent.speed = patrolSpeed;
+                    if (waypoints != null && waypoints.Length > 0) GoToCurrentWaypoint();
+                }
+
+                return;
+            }
+
+            agent.speed = Mathf.Lerp(agent.speed, patrolSpeed, 10f * Time.deltaTime);
+            if (waypoints == null || waypoints.Length == 0) return;
+
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                TryAttack();
-                if (lastHeardPosition.HasValue) NoiseSystem.Instance.ConsumeNoiseAtPosition(lastHeardPosition.Value, 0.6f);
-                lastHeardPosition = null;
-                isInvestigating = false;
-                agent.speed = patrolSpeed;
-                if (waypoints != null && waypoints.Length > 0) GoToCurrentWaypoint();
-            }
-
-            return;
-        }
-
-        agent.speed = Mathf.Lerp(agent.speed, patrolSpeed, 10f * Time.deltaTime);
-        if (waypoints == null || waypoints.Length == 0) return;
-
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-        {
-            waitTimer += Time.deltaTime;
-            if (waitTimer >= waitTimeAtPoint)
-            {
-                currentIndex = (currentIndex + 1) % waypoints.Length;
-                GoToCurrentWaypoint();
-                waitTimer = 0f;
+                waitTimer += Time.deltaTime;
+                if (waitTimer >= waitTimeAtPoint)
+                {
+                    currentIndex = (currentIndex + 1) % waypoints.Length;
+                    GoToCurrentWaypoint();
+                    waitTimer = 0f;
+                }
             }
         }
+        
     }
 
-    // 🔊 Lógica de pasos dinámica
     void HandleFootsteps()
     {
         if (!agent.hasPath || agent.velocity.magnitude < 0.1f) return;
@@ -168,30 +185,59 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     bool CheckAttackHitbox(out Collider[] hitsFiltered)
     {
         Vector3 boxCenterWorld = transform.TransformPoint(attackBoxCenter);
-        int mask = attackMask == 0 ? ~0 : attackMask;
-        Collider[] rawHits = Physics.OverlapBox(boxCenterWorld, attackBoxSize * 0.5f, transform.rotation, mask);
 
-        hitsFiltered = rawHits.Where(c => c != null && c.gameObject != gameObject && !c.transform.IsChildOf(transform)).ToArray();
+        // Combina ambos LayerMask
+        int mask = (attackMask | attackObject);
+        if (mask == 0) mask = ~0; // fallback si ninguno está configurado
+
+        Collider[] rawHits = Physics.OverlapBox(
+            boxCenterWorld,
+            attackBoxSize * 0.5f,
+            transform.rotation,
+            mask
+        );
+
+        hitsFiltered = rawHits
+            .Where(c => c != null && c.gameObject != gameObject && !c.transform.IsChildOf(transform))
+            .ToArray();
 
         return hitsFiltered.Length > 0;
     }
+
 
     void OnDetectTargets(Collider[] hits)
     {
         if (isAttacking && Time.time - lastAttackTime < attackCooldown) return;
 
-        agent.isStopped = true;
-        agent.ResetPath();
-        isInvestigating = false;
-        lastHeardPosition = null;
+        // Revisar si hay Player en los hits
+        bool playerHit = hits.Any(c => c != null &&
+                                       (c.gameObject.layer == LayerMask.NameToLayer("Player") || c.CompareTag("Player")));
 
-        isAttacking = true;
-        lastAttackTime = Time.time;
-        PerformAttack(hits);
+        if (playerHit)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+            isInvestigating = false;
+            lastHeardPosition = null;
 
-        float attackDuration = 0.6f;
-        Invoke(nameof(EndAttack), attackDuration);
+            isAttacking = true;
+            lastAttackTime = Time.time;
+            PerformAttack(hits);
+
+            float attackDuration = 0.6f;
+            Invoke(nameof(EndAttack), attackDuration);
+        }
+        else
+        {
+            // Si no es Player, simplemente atacar y seguir
+            PerformAttack(hits);
+            // Reactivar patrulla
+            agent.isStopped = false;
+            agent.speed = patrolSpeed;
+            if (waypoints != null && waypoints.Length > 0) GoToCurrentWaypoint();
+        }
     }
+
 
     void EndAttack()
     {
@@ -215,20 +261,78 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
 
     void PerformAttack(Collider[] hits)
     {
-        // 🔊 reproducir sonido de ataque
-        if (attackSound != null) audioSource.PlayOneShot(attackSound);
-
         foreach (var c in hits)
         {
             if (c == null) continue;
+
             if (c.gameObject.layer == LayerMask.NameToLayer("Player") || c.CompareTag("Player"))
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                SceneManager.LoadScene("00.GameOver");
+
+                if (attackSound != null && !playerDead)
+                    audioSource.PlayOneShot(attackSound);
+
+                playerDead = true;
+                var movement = c.GetComponent<PlayerMovement>();
+                if (movement != null) movement.enabled = false;
+
+                playerCamera.enabled = false;
+
+                StartCoroutine(RotateToTarget());
+                StartCoroutine(FadeAndLoadScene("00.GameOver"));
+            }
+            else
+            {
+                Debug.Log("1");
+                c.gameObject.layer = LayerMask.NameToLayer("Interactable");
+
+                if (attackSound != null)
+                    audioSource.PlayOneShot(attackSound);
+
+                var objectNoise = c.GetComponent<Interactable>();
+                objectNoise.dejarDeHacerRuido();
+
+                if (NoiseSystem.Instance != null)
+                {
+                    Debug.Log("2");
+                    NoiseSystem.Instance.noises.Clear();
+                }
             }
         }
     }
+
+    IEnumerator RotateToTarget()
+    {
+        Quaternion from = cam.transform.rotation;
+        Quaternion to = Quaternion.LookRotation(targetPoint.position - cam.transform.position);
+        float t = 0f;
+        while (t < 1f)
+        {
+            cam.transform.rotation = Quaternion.Slerp(from, to, t);
+            t += Time.deltaTime / duration;
+            yield return null;
+        }
+        cam.transform.rotation = to;
+    }
+
+    IEnumerator FadeAndLoadScene(string sceneName)
+    {
+        float t = 0f;
+        Color c = fadeImage.color;
+        while (t < 1f)
+        {
+            c.a = Mathf.Lerp(0f, 1f, t);
+            fadeImage.color = c;
+            t += Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+        c.a = 1f;
+        fadeImage.color = c;
+
+        SceneManager.LoadScene(sceneName);
+    }
+
 
     void OnDrawGizmos()
     {

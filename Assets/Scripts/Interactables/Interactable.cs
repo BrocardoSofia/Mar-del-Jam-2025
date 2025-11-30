@@ -5,6 +5,7 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField]
     public string prompMessage;
 
+
     public virtual string OnLook()
     {
         return prompMessage;
@@ -16,6 +17,11 @@ public abstract class Interactable : MonoBehaviour
     }
 
     protected virtual void Interact()
+    {
+
+    }
+
+    public virtual void dejarDeHacerRuido()
     {
 
     }

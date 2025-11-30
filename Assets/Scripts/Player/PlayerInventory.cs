@@ -1,11 +1,17 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
     public AudioClip sonidoKey; 
     public AudioClip sonidoUsarKey;
     public AudioSource audioSource;
+    public Image llaves;
+    public Sprite sinLlaves;
+    public Sprite conLlaves;
+    public TextMeshProUGUI promptText;
 
     private int keys = 0;
 
@@ -27,18 +33,23 @@ public class PlayerInventory : MonoBehaviour
         }
         
         keys++;
+        llaves.sprite = conLlaves;
+        promptText.text = ""+keys;
     }
 
     public void removeKey() 
     { 
-        keys--; 
+        keys--;
+        promptText.text = "" + keys;
     }
 
     public int useKey()
     {
         int key;
         if (keys == 0)
+        {
             key = 0;
+        }
         else
         {
             key = 1;
@@ -49,6 +60,11 @@ public class PlayerInventory : MonoBehaviour
             }
         }
 
+        if (keys == 0)
+        {
+            llaves.sprite = sinLlaves;
+        }
+        promptText.text = "" + keys;
         return key;
     }
 }

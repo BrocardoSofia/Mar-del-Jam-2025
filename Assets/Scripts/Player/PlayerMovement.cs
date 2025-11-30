@@ -81,14 +81,14 @@ public class PlayerMovement : MonoBehaviour
         else if (isRunning && moving)
         {
             currentSpeed = runStepInterval;
-            ruido.haceRuido();
+            ruido.haceRuido(1, transform.position);
             currentPitch = runPitch;
             StartFootstepsIfNeeded(runStepInterval, runSteps);
         }
         else if (moving)
         {
             currentSpeed = walkStepInterval;
-            ruido.haceRuido(); 
+            ruido.haceRuido(1, transform.position); 
             currentPitch = runPitch;
             StartFootstepsIfNeeded(walkStepInterval, walkSteps);
         }
