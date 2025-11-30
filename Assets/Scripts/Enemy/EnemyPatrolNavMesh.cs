@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -20,6 +20,17 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     public LayerMask attackMask;
     public float attackCooldown = 1.0f;
 
+    [Header("Audio")]
+    public AudioClip[] walkSounds;   // sonidos al patrullar
+    public AudioClip[] runSounds;    // sonidos al correr
+    public AudioClip attackSound;    // sonido al atacar
+    public AudioSource audioSource;
+
+    // Intervalos de pasos
+    public float walkStepInterval = 0.8f;
+    public float runStepInterval = 0.4f;
+    private float stepTimer = 0f;
+
     private NavMeshAgent agent;
     private int currentIndex = 0;
     private float waitTimer = 0f;
@@ -34,6 +45,8 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         if (agent == null) Debug.LogError("Falta NavMeshAgent en el enemigo.");
         agent.speed = patrolSpeed;
+
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void OnEnable()
@@ -43,6 +56,8 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
 
     void Update()
     {
+        HandleFootsteps(); // 🔊 reproducir sonidos de pasos según velocidad
+
         if (isAttacking)
         {
             if (CheckAttackHitbox(out Collider[] hits))
@@ -66,7 +81,7 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
         {
             var noises = NoiseSystem.Instance.noises;
             var heard = noises
-                .Where(n => Vector3.Distance(transform.position, n.pos) <= n.radius && Vector3.Distance(transform.position, n.pos) <= hearingRadius)
+                .Where(n => Vector3.Distance(transform.position, n.pos) <= hearingRadius)
                 .ToList();
 
             if (heard.Count > 0)
@@ -118,6 +133,27 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
                 currentIndex = (currentIndex + 1) % waypoints.Length;
                 GoToCurrentWaypoint();
                 waitTimer = 0f;
+            }
+        }
+    }
+
+    // 🔊 Lógica de pasos dinámica
+    void HandleFootsteps()
+    {
+        if (!agent.hasPath || agent.velocity.magnitude < 0.1f) return;
+
+        float currentInterval = agent.speed >= chaseSpeed * 0.9f ? runStepInterval : walkStepInterval;
+        stepTimer += Time.deltaTime;
+
+        if (stepTimer >= currentInterval)
+        {
+            stepTimer = 0f;
+
+            AudioClip[] clips = agent.speed >= chaseSpeed * 0.9f ? runSounds : walkSounds;
+            if (clips != null && clips.Length > 0)
+            {
+                AudioClip clip = clips[Random.Range(0, clips.Length)];
+                audioSource.PlayOneShot(clip);
             }
         }
     }
@@ -179,6 +215,9 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
 
     void PerformAttack(Collider[] hits)
     {
+        // 🔊 reproducir sonido de ataque
+        if (attackSound != null) audioSource.PlayOneShot(attackSound);
+
         foreach (var c in hits)
         {
             if (c == null) continue;
