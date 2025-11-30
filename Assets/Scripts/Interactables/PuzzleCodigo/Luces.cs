@@ -11,6 +11,14 @@ public class Luces : MonoBehaviour
 
     private string codigoActual = "";
 
+    void Start()
+    {
+        foreach (Luz luz in luces)
+        {
+            luz.apagar();
+        }
+    }
+
     public void abrirContraseña(string numero, Luz luzEncendida)
     {
         codigoActual += numero;
