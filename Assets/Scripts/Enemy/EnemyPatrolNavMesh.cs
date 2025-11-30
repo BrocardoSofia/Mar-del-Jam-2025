@@ -290,9 +290,6 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
                 if (attackSound != null)
                     audioSource.PlayOneShot(attackSound);
 
-                var objectNoise = c.GetComponent<Interactable>();
-                objectNoise.dejarDeHacerRuido();
-
                 if (NoiseSystem.Instance != null)
                 {
                     Debug.Log("2");

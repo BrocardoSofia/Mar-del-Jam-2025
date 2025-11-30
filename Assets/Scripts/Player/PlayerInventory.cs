@@ -13,7 +13,12 @@ public class PlayerInventory : MonoBehaviour
     public Sprite conLlaves;
     public TextMeshProUGUI promptText;
 
+    public Image piedras;
+    public Sprite sinPiedras;
+    public Sprite conPiedras;
+
     private int keys = 0;
+    private bool piedra = false;
 
     void Start()
     {
@@ -23,6 +28,52 @@ public class PlayerInventory : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
         }
 
+    }
+
+    public bool agarrarPiedra()
+    {
+        if(piedra)
+            return false;
+        else
+        {
+            if (sonidoKey != null)
+            {
+                AudioSource.PlayClipAtPoint(sonidoKey, Camera.main.transform.position, 1f);
+            }
+            piedras.sprite = conPiedras;
+            piedra = true;
+            return true;
+        }
+    }
+
+    public GameObject ObtenerPiedra()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.layer == LayerMask.NameToLayer("Piedra"))
+            {
+                return child.gameObject;
+            }
+        }
+        return null;
+    }
+
+    public bool tirarPiedra()
+    {
+        bool tiro = piedra;
+
+        if (tiro)
+        {
+            piedras.sprite = sinPiedras;
+            piedra = !piedra;
+        }
+
+       return tiro;
+    }
+
+    public bool hayPiedra()
+    {
+        return piedra;
     }
 
     public void addKey()

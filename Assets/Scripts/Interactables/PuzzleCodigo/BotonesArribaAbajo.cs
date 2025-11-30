@@ -50,8 +50,4 @@ public class BotonesArribaAbajo : Interactable
         }
     }
 
-    public override void dejarDeHacerRuido()
-    {
-        ruido.dejaDeHacerRuido();
-    }
 }
