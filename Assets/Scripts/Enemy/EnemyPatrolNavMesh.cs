@@ -40,7 +40,7 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
     public float duration = 1f;
 
     [Header("Animación (opcional)")]
-    public Animator animator;
+    public Animation animator;
     public string paramSpeed = "Speed";
     public string paramIsRunning = "IsRunning";
     public string paramAttack = "IsAttacking";
@@ -149,26 +149,53 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
             waitTimer += Time.deltaTime;
-            SafeAnimSet(paramIsWaiting, true); // ← ANIMACIÓN
+            UpdateAnimations();
 
             if (waitTimer >= waitTimeAtPoint)
             {
                 currentIndex = (currentIndex + 1) % waypoints.Length;
                 GoToCurrentWaypoint();
                 waitTimer = 0f;
-                SafeAnimSet(paramIsWaiting, false);
             }
         }
     }
 
 
-    // ########### ANIMACIÓN principal ###########
     void UpdateAnimations()
     {
+        if (animator == null) return;
+
         float speed = agent.velocity.magnitude;
 
-        SafeAnimSetFloat(paramSpeed, speed);
-        SafeAnimSet(paramIsRunning, speed >= chaseSpeed * 0.7f);
+        if (isAttacking)
+        {
+            animator.Play("atack_rata");
+            return;
+        }
+
+        // Si está esperando entre waypoints
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && !isInvestigating)
+        {
+            animator.Play("watch_rata");
+            return;
+        }
+
+        // Si corre (persecución)
+        if (speed >= chaseSpeed * 0.5f)
+        {
+            animator.Play("run_rata");
+            return;
+        }
+
+        // Si camina (patrulla normal)
+        if (speed > 0.1f)
+        {
+            animator.Play("walk_rata");
+            return;
+        }
+
+        // Idle / buscar
+        animator.Play("watch_rata");
     }
 
     void HandleFootsteps()
@@ -218,27 +245,6 @@ public class EnemyPatrolNavMeshWithHearing : MonoBehaviour
             .ToArray();
 
         return hitsFiltered.Length > 0;
-    }
-
-    void SafeAnimSet(string param, bool value)
-    {
-        if (animator == null) return;
-        if (!animator.HasParameterOfType(param, AnimatorControllerParameterType.Bool)) return;
-        animator.SetBool(param, value);
-    }
-
-    void SafeAnimSetFloat(string param, float value)
-    {
-        if (animator == null) return;
-        if (!animator.HasParameterOfType(param, AnimatorControllerParameterType.Float)) return;
-        animator.SetFloat(param, value);
-    }
-
-    void SafeAnimTrigger(string param)
-    {
-        if (animator == null) return;
-        if (!animator.HasParameter(param)) return;
-        animator.SetTrigger(param);
     }
 
     void OnDetectTargets(Collider[] hits)

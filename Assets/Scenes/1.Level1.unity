@@ -3207,6 +3207,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1435067050243353254, guid: 3ea017aee89a5c44ea7b72080a4412ed, type: 3}
   m_PrefabInstance: {fileID: 676195575}
   m_PrefabAsset: {fileID: 0}
+--- !u!111 &709706303 stripped
+Animation:
+  m_CorrespondingSourceObject: {fileID: 6573336757977895417, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+  m_PrefabInstance: {fileID: 983209194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &741756527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5175,6 +5180,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1195147502}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 709706303}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: fadeImage
       value: 
       objectReference: {fileID: 1718111474}
@@ -6690,6 +6699,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3360652740336061099, guid: 8ed1836554663a345b7731a4176363db, type: 3}
   m_PrefabInstance: {fileID: 1227580821}
   m_PrefabAsset: {fileID: 0}
+--- !u!111 &1235036957 stripped
+Animation:
+  m_CorrespondingSourceObject: {fileID: 6573336757977895417, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+  m_PrefabInstance: {fileID: 1530686516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1250872010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3507120100714523508, guid: 34bbf09978d05e047b53dcf247136a0a, type: 3}
@@ -8152,6 +8166,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1195147502}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1235036957}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: fadeImage
       value: 
@@ -10756,7 +10774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1889671926
 Transform:
   m_ObjectHideFlags: 0
@@ -12205,6 +12223,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1195147502}
     - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 6359798447366063724}
+    - target: {fileID: 1053767624166273040, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: fadeImage
       value: 
       objectReference: {fileID: 1718111474}
@@ -12412,6 +12434,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 12.56
       objectReference: {fileID: 0}
+    - target: {fileID: 6573336757977895417, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6960950836352262594, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.01
@@ -12436,11 +12462,17 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1587367876277630780, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+--- !u!111 &6359798447366063724 stripped
+Animation:
+  m_CorrespondingSourceObject: {fileID: 6573336757977895417, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
+  m_PrefabInstance: {fileID: 6359798447366063723}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6397787950860969598
 PrefabInstance:
   m_ObjectHideFlags: 0
