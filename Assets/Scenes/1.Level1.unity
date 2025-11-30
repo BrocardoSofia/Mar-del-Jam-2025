@@ -1970,6 +1970,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorPasword2
       objectReference: {fileID: 0}
+    - target: {fileID: 2755006404904869351, guid: d0896790cdd2c3e4b95ede90cd94c0ab, type: 3}
+      propertyPath: ruido
+      value: 
+      objectReference: {fileID: 1867543014}
+    - target: {fileID: 2869347751155923316, guid: d0896790cdd2c3e4b95ede90cd94c0ab, type: 3}
+      propertyPath: ruido
+      value: 
+      objectReference: {fileID: 1867543014}
+    - target: {fileID: 3630833123249279551, guid: d0896790cdd2c3e4b95ede90cd94c0ab, type: 3}
+      propertyPath: ruido
+      value: 
+      objectReference: {fileID: 1867543014}
+    - target: {fileID: 5552915552820655940, guid: d0896790cdd2c3e4b95ede90cd94c0ab, type: 3}
+      propertyPath: ruido
+      value: 
+      objectReference: {fileID: 1867543014}
+    - target: {fileID: 6394368924721732623, guid: d0896790cdd2c3e4b95ede90cd94c0ab, type: 3}
+      propertyPath: ruido
+      value: 
+      objectReference: {fileID: 1867543014}
+    - target: {fileID: 6437644436471347356, guid: d0896790cdd2c3e4b95ede90cd94c0ab, type: 3}
+      propertyPath: ruido
+      value: 
+      objectReference: {fileID: 1867543014}
     - target: {fileID: 6736613755386016647, guid: d0896790cdd2c3e4b95ede90cd94c0ab, type: 3}
       propertyPath: audioSource
       value: 
@@ -3433,7 +3457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3675202770543710183, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 133.2
+      value: 101.5
       objectReference: {fileID: 0}
     - target: {fileID: 3675202770543710183, guid: e20e3106c30972f43832f16ed6362e47, type: 3}
       propertyPath: m_LocalRotation.w

@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Key : Interactable
 {
     [SerializeField]
     private PlayerInventory playerInventory;
+
+    public PlayerRuido ruido;
 
     private string startPrompt;
 
