@@ -1,0 +1,133 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|c:\\users\\sofi\\documents\\github\\mar-del-jam-2025\\assets\\scripts\\gamemanager\\actionsbuttons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager\\actionsbuttons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\assets\\scripts\\creditscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\creditscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\assets\\scripts\\enemy\\enemypatrolnavmesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemypatrolnavmesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\assets\\scripts\\noisesystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\noisesystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\assets\\scripts\\musicmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\musicmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\assets\\scripts\\menumusic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menumusic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\assets\\scripts\\soundbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45C1E735-3317-137B-B3CA-90DC43F9769A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\soundbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NoiseSystem.cs",
+              "DocumentMoniker": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\NoiseSystem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\NoiseSystem.cs",
+              "ToolTip": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\NoiseSystem.cs",
+              "RelativeToolTip": "Assets\\Scripts\\NoiseSystem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T22:43:00.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ActionsButtons.cs",
+              "DocumentMoniker": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\GameManager\\ActionsButtons.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager\\ActionsButtons.cs",
+              "ToolTip": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\GameManager\\ActionsButtons.cs",
+              "RelativeToolTip": "Assets\\Scripts\\GameManager\\ActionsButtons.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T22:41:04.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EnemyPatrolNavMesh.cs",
+              "DocumentMoniker": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\Enemy\\EnemyPatrolNavMesh.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyPatrolNavMesh.cs",
+              "ToolTip": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\Enemy\\EnemyPatrolNavMesh.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy\\EnemyPatrolNavMesh.cs",
+              "ViewState": "AgIAAOEAAAAAAAAAAAAQwO4AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T22:35:32.476Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreditScript.cs",
+              "DocumentMoniker": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\CreditScript.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\CreditScript.cs",
+              "ToolTip": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\CreditScript.cs",
+              "RelativeToolTip": "Assets\\Scripts\\CreditScript.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T21:33:01.906Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SoundButton.cs",
+              "DocumentMoniker": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\SoundButton.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SoundButton.cs",
+              "ToolTip": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\SoundButton.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SoundButton.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T20:46:00.225Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MenuMusic.cs",
+              "DocumentMoniker": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\MenuMusic.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MenuMusic.cs",
+              "ToolTip": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\MenuMusic.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MenuMusic.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T20:14:59.19Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MusicManager.cs",
+              "DocumentMoniker": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\MusicManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MusicManager.cs",
+              "ToolTip": "C:\\Users\\Sofi\\Documents\\GitHub\\Mar-del-Jam-2025\\Assets\\Scripts\\MusicManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MusicManager.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAQwEcAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T20:05:17.16Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
