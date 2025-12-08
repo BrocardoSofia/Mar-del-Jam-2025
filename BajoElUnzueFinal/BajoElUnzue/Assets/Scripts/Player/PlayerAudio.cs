@@ -7,7 +7,7 @@ public class PlayerAudio : MonoBehaviour
     public SFXManager soundMaker;
     public Transform rayOrigin;
     public float rayDistance = 1.5f;
-    public LayerMask groundMask; // qué capas cuentan como “suelo” para el raycast
+    public LayerMask groundMask;
 
     [Header("Superficies")]
     public LayerMask cementMask;
@@ -91,7 +91,7 @@ public class PlayerAudio : MonoBehaviour
         AudioClip clip = GetClipFor(toMode, toSurface);
         if (clip != null)
         {
-            soundMaker.playerSoundLoop(clip);
+            soundMaker.playerSoundLoopRandomStart(clip);
         }
         else
         {
