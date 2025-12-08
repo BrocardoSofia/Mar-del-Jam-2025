@@ -1,5 +1,4 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -73,4 +72,8 @@ public class PlayerMovement : MonoBehaviour
             Time.deltaTime * crouchTransitionSpeed
         );
     }
+
+    public bool IsRunning => isRunning;
+    public bool IsCrouching => isCrouching;
+    public bool IsMoving => moveInput.magnitude > 0.1f;
 }
