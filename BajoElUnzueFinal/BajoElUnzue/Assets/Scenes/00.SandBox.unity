@@ -569,7 +569,14 @@ MonoBehaviour:
   sinLlaves: {fileID: 21300000, guid: d19d0776785c4d04dacc7c5879fc1a0e, type: 3}
   conLlaves: {fileID: 21300000, guid: e59d35cfa83d35348a20baacb8e5fe63, type: 3}
   cantKeysText: {fileID: 89839852}
+  cantPiedrasText: {fileID: 1213566141}
+  piedrasImg: {fileID: 1363978719}
+  piedra0: {fileID: 21300000, guid: 69345f5ed1c381344b26e5ec8bffbcad, type: 3}
+  piedra1: {fileID: 21300000, guid: f4592b38c18e83648ac6330aa120675f, type: 3}
+  piedra2: {fileID: 21300000, guid: 44ab768d30e721e4a869c2fba86b9f4e, type: 3}
+  piedra3: {fileID: 21300000, guid: 4fd2bf4ea0b61604ea980fb06bffeef0, type: 3}
   keys: 0
+  piedras: 0
 --- !u!114 &160734465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1432,7 +1439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 836, y: -450.2}
+  m_AnchoredPosition: {x: 831, y: -450.2}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1213566141
@@ -1568,7 +1575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 780.30005, y: -470}
+  m_AnchoredPosition: {x: 775.30005, y: -470}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1363978719
@@ -2075,7 +2082,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 61df6c9f4ec497c4dab94f81783a8497, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Key : Interactable
+public class Piedra : Interactable
 {
     [SerializeField]
     private PlayerInventario playerInventory;
@@ -13,7 +13,14 @@ public class Key : Interactable
 
     protected override void Interact()
     {
-        playerInventory.addKey();
-        Destroy(gameObject);
+        if(playerInventory.puedoAgarrarPiedras())
+        {
+            playerInventory.addPiedra();
+            Destroy(gameObject);
+        }
+        else
+        {
+
+        }
     }
 }

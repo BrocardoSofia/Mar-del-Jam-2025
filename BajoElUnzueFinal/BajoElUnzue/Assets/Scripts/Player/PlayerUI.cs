@@ -15,4 +15,6 @@ public class PlayerUI : MonoBehaviour
     {
         promptText.text = promptMessage;
     }
+
+    //funcion avisar por 3 segundos
 }

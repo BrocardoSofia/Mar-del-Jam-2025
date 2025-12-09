@@ -11,13 +11,20 @@ public class PlayerInventario : MonoBehaviour
     public Sprite sinLlaves;
     public Sprite conLlaves;
     public TextMeshProUGUI cantKeysText;
-    /*
-    public Image piedras;
-    public Sprite sinPiedras;
-    public Sprite conPiedras;*/
+
+    public TextMeshProUGUI cantPiedrasText;
+    public Image piedrasImg;
+    public Sprite piedra0;
+    public Sprite piedra1;
+    public Sprite piedra2;
+    public Sprite piedra3;
 
     [SerializeField]
     private int keys = 0;
+    [SerializeField]
+    private int piedras = 0;
+
+    private int maxPiedras = 3;
 
     public void addKey()
     {
@@ -60,5 +67,42 @@ public class PlayerInventario : MonoBehaviour
         }
         cantKeysText.text = "" + keys;
         return key;
+    }
+
+    public void addPiedra()
+    {
+        if(piedras != maxPiedras)
+        {
+            if (sonidoAgarrar != null)
+            {
+                soundMaker.playerSoundOnce(sonidoAgarrar);
+            }
+
+            piedras++;
+
+            switch (piedras)
+            {
+                case 0:
+                    piedrasImg.sprite = piedra0;
+                    break;
+                case 1:
+                    piedrasImg.sprite = piedra1;
+                    break;
+                case 2:
+                    piedrasImg.sprite = piedra2;
+                    break;
+                case 3:
+                    piedrasImg.sprite = piedra3;
+                    break;
+            }
+
+            cantPiedrasText.text = "" + piedras;
+        }
+        
+    }
+
+    public bool puedoAgarrarPiedras()
+    {
+        return (piedras!=maxPiedras);
     }
 }
