@@ -72,4 +72,9 @@ public class NoiseSystem : MonoBehaviour
     {
         noises.RemoveAll(n => (Time.time - n.time) > noiseLifetime);
     }
+
+    public void RemoveAllNoice()
+    {
+        noises.Clear();
+    }
 }
