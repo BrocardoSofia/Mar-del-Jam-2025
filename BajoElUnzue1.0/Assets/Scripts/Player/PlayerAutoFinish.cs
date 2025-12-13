@@ -24,6 +24,9 @@ public class PlayerAutoFinish : MonoBehaviour
 
         music.reproducirFinalBueno();
 
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         StartCoroutine(RotateToTarget());
         StartCoroutine(MoveToPoint(other.transform));
         StartCoroutine(FadeIn());
